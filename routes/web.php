@@ -1,18 +1,18 @@
 <?php
 
+use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('menu');
 });
+
+Route::resource('vehicles', VehicleController::class);
+Route::get('/vehicles/find', [VehicleController::class, 'findByPlate'])->name('vehicles.find');
+Route::get('/vehicles/statistics', [VehicleController::class, 'statistics'])->name('vehicles.statistics');
+Route::get('/vehicles/{vehicle}', [VehicleController::class, 'show'])->name('vehicles.show');
+Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicles.index');
+
+
